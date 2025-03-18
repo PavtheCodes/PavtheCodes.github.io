@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.12",
+    "tailwindcss": "^4.0.12"
+  },
+  "name": "newsoutlet",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx @tailwindcss/cli -i ./styles/input.css -o ./pages/main.css --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

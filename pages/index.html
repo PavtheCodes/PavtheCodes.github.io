@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StarNews</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+    <header class="bg-black text-white p-5">
+        <section class="max-w-6xl mx-auto flex justify-between items-center px-20"> <!-- kom ihåg att byyta den där width skiten -->
+            <h1 class="text-4xl hover:text-amber-200 transition-colors duration-500 mr-2">StarNews</h1>
+            <nav>
+                <ul class="flex space-x-5">
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Home</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">World</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Tech</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Politics</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Economy</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Sports</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Entertainment</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Health</a></li>
+                </ul>
+            </nav>
+        </section>
+    </header>
+    
+    <main class="flex flex-col md:flex-row gap-4 mx-auto max-w-6xl w-full p-5">
+        <aside id="sidebar" class="w-full md:w-1/5 min-w-[300px] max-w-[200px] mr-10">
+            <div class="mb-5 p-4 bg-gray-100 rounded-lg shadow-lg">
+                <a href="#">
+                    <h2 class="text-blue-700 hover:text-sky-500 duration-200">Israeli-Palestinian Conflict | Council on Foreign Relations</h2>
+                </a>
+                <img src="../images/israelpalestine.webp" class="w-full max-w-[250px] h-auto mt-2">
+            </div>
+            <div class="mb-5 p-4 bg-gray-100 rounded-lg shadow-lg">
+                <a href="#">
+                    <h2 class="text-blue-700 hover:text-sky-500 duration-200">Elon Musk & President Trump</h2>
+                </a>
+                <img src="../images/elonmusk.avif" class="w-full max-w-[250px] h-auto mt-2">
+            </div>
+            <div class="mb-5 p-4 bg-gray-100 rounded-lg shadow-lg">
+                <a href="#">
+                    <h2 class="text-blue-700 hover:text-sky-500 duration-200">Slowdive Free Concert in Athens, GA</h2>
+                </a>
+                <img src="../images/slowdive.jpg" class="w-full max-w-[250px] h-auto mt-2">
+            </div>
+        </aside>
+        
+        <section id="mainarticle" class="w-full md:flex-1">
+            <h1 class="font-serif text-4xl underline">Tragic Train Collisions in Greece</h1>
+            <p class="mt-2 underline decoration-dotted">A series of devastating train crashes has shocked the nation, raising urgent questions about railway safety and infrastructure. Here’s what we know so far.</p>
+            <p class="mt-2">In recent months, Greece has been shaken by a series of devastating train collisions that have left the country in mourning and sparked widespread outrage. The most recent crash, which occurred on [insert date], involved a passenger train colliding with a freight train near [location]. The impact was catastrophic, with multiple carriages derailing and dozens of lives lost. Rescue teams worked tirelessly through the night to pull survivors from the wreckage, but the damage was overwhelming, and the emotional toll on the nation has been immense.</p>
+            <p class="mt-2">Initial investigations into the crashes point to a combination of outdated infrastructure and human error. Reports suggest that the signaling system, designed to prevent such collisions, failed to alert the train operators in time. Miscommunication between train staff and control centers may have also played a role. Greece’s railway network has long been criticized for its lack of modernization, with tracks and equipment in dire need of upgrades. Critics argue that safety protocols were either ignored or not properly enforced, raising serious questions about the state of the country’s rail system.</p>
+            <img src="../images/tempi.jpg" class="w-full h-auto mt-4">
+        </section>
+    </main>
+    
+    <footer class="bg-gray-900 text-white py-8 mt-auto">
+        <div class="container mx-auto px-6 text-center">
+            <h3>About Us:</h3>
+            <p>We provide honest news from reliable sources.</p>
+            <div class="mt-4">
+                <h3 class="text-lg font-semibold">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Support</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Socials</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-4 text-gray-500">
+                © 2025 StarCloud. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
