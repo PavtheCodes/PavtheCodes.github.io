@@ -2665,7 +2665,6 @@
 }
 
 
-
 #footertext {
   font-size: large;
   line-height: 1.5;
@@ -2677,11 +2676,7 @@
   color: white;
 }
 
-@media (min-width: 768px) { 
-
-}
-
-@media (max-width: 768px) { 
+@media screen and (max-width: 768px) { 
   #sidebar {
     margin: 0 auto;
     width: 300px;
@@ -2703,5 +2698,12 @@
     margin-top: 10%;
     margin-bottom: 20%;
   }
+  #news-card {
+    width: 100%;
+  }
 
+  #categories {
+    flex-direction: column;
+    text-align:left;
+  }
 }
