@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article - StarNews</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./pages/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body class="flex flex-col min-h-screen font-serif">
+    <header class="bg-black text-white p-5">
+        <section class="max-w-6xl mx-auto flex justify-between items-center px-10">
+            <h1 class="text-4xl hover:text-amber-200 transition-colors duration-500 mr-2">StarNews</h1>
+            <nav>
+                <ul class="flex space-x-4 items-center">
+                    <li><a href="./index.html" class="hover:text-amber-200 duration-500 ml-4">Home</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">World</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Tech</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Politics</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Economy</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Sports</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Entertainment</a></li>
+                    <li><a href="#" class="hover:text-amber-200 duration-500">Health</a></li>
+                </ul>
+            </nav>
+        </section>
+    </header>
+
+    <main class="mx-auto max-w-4xl w-full p-5">
+        <article id="articleContent" class="bg-white p-6 rounded-lg shadow-lg">
+        </article>
+        
+        <section id="commentsSection" class="mt-8 bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-4">Comments</h2>
+            <div id="commentsList" class="space-y-4">
+            </div>
+            <form id="commentForm" class="mt-6">
+                <textarea id="commentText" rows="3" class="w-full border border-gray-300 rounded-md p-2" placeholder="Add your comment..."></textarea>
+                <button type="submit" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Post Comment</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-8 mt-auto">
+        <div class="container mx-auto px-6 text-center">
+            <h3>About Us:</h3>
+            <p>We provide honest news from reliable sources.</p>
+            <div class="mt-4">
+                <h3 class="text-lg font-semibold">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="../index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Support</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Socials</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-4 text-gray-500">
+                © 2025 StarCloud. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleId = parseInt(urlParams.get('id'));
+            const articles = JSON.parse(localStorage.getItem('articles')) || [];
+            const article = articles.find(a => a.id === articleId);
+            
+            if (article) {
+                document.title = `${article.title} - StarNews`;
+                
+                const articleContent = document.getElementById('articleContent');
+                articleContent.innerHTML = `
+                    <h1 class="text-3xl font-bold mb-2">${article.title}</h1>
+                    <p class="text-gray-500 text-sm mb-4">${new Date(article.date).toLocaleDateString()}</p>
+                    ${article.image ? `<img src="${article.image}" class="w-full h-auto mb-6 rounded-lg">` : ''}
+                    <div class="prose max-w-none">${article.content}</div>
+                    <div class="mt-6 flex space-x-4">
+                        <button class="like-btn px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                            Like (${article.likes || 0})
+                        </button>
+                        <button class="dislike-btn px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                            Dislike (${article.dislikes || 0})
+                        </button>
+                    </div>
+                `;
+                
+                const commentsList = document.getElementById('commentsList');
+                if (article.comments && article.comments.length > 0) {
+                    article.comments.forEach(comment => {
+                        const commentElement = document.createElement('div');
+                        commentElement.className = 'border-b border-gray-200 pb-4';
+                        commentElement.innerHTML = `
+                            <p class="font-semibold">${comment.author || 'Anonymous'}</p>
+                            <p class="text-gray-600 text-sm">${new Date(comment.date).toLocaleString()}</p>
+                            <p class="mt-1">${comment.text}</p>
+                        `;
+                        commentsList.appendChild(commentElement);
+                    });
+                } else {
+                    commentsList.innerHTML = '<p class="text-gray-500">No comments yet. Be the first to comment!</p>';
+                }
+                
+                document.getElementById('commentForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const commentText = document.getElementById('commentText').value.trim();
+                    
+                    if (commentText) {
+                        const newComment = {
+                            text: commentText,
+                            author: 'Pavlos', 
+                            date: new Date().toISOString()
+                        };
+                        
+                        article.comments = article.comments || [];
+                        article.comments.push(newComment);
+                        localStorage.setItem('articles', JSON.stringify(articles));
+                        
+                        const commentElement = document.createElement('div');
+                        commentElement.className = 'border-b border-gray-200 pb-4';
+                        commentElement.innerHTML = `
+                            <p class="font-semibold">${newComment.author}</p>
+                            <p class="text-gray-600 text-sm">${new Date(newComment.date).toLocaleString()}</p>
+                            <p class="mt-1">${newComment.text}</p>
+                        `;
+                        
+                        if (commentsList.firstChild && commentsList.firstChild.textContent.includes('No comments')) {
+                            commentsList.innerHTML = '';
+                        }
+                        commentsList.appendChild(commentElement);
+                        
+                        document.getElementById('commentText').value = '';
+                    }
+                });
+                
+                document.querySelector('.like-btn')?.addEventListener('click', function() {
+                    article.likes = (article.likes || 0) + 1;
+                    localStorage.setItem('articles', JSON.stringify(articles));
+                    this.textContent = `Like (${article.likes})`;
+                });
+                
+                document.querySelector('.dislike-btn')?.addEventListener('click', function() {
+                    article.dislikes = (article.dislikes || 0) + 1;
+                    localStorage.setItem('articles', JSON.stringify(articles));
+                    this.textContent = `Dislike (${article.dislikes})`;
+                });
+            } else {
+                document.getElementById('articleContent').innerHTML = `
+                    <h1 class="text-2xl font-bold">Article not found</h1>
+                    <p class="mt-2">The article you're looking for doesn't exist or has been deleted.</p>
+                    <a href="../index.html" class="mt-4 inline-block text-blue-600 hover:underline">Return to homepage</a>
+                `;
+                document.getElementById('commentsSection').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
